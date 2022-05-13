@@ -1,6 +1,6 @@
 <template>
   <Form @onSubmit="handleSubmit" />
-  <List :items="notes" @onRemove="handleRemove" />
+  <List @onRemove="handleRemove" :items="notes" />
 </template>
 
 <script>
@@ -14,13 +14,50 @@ export default {
   },
   data() {
     return {
-      notes: ['task 1', 'task 2', 'task 3']
+      notes: [
+        {
+          title: 'Learn Vue 3',
+          tags: ['work']
+        },
+        {
+          title: 'Finish Course',
+          tags: ['work', 'home']
+        },
+        {
+          title: 'Visit Museum',
+          tags: ['travel']
+        }
+      ]
+    }
+  },
+  mounted() {
+    this.getNotes()
+  },
+  watch: {
+    notes: {
+      handler(updatedList) {
+        localStorage.setItem('notes', JSON.stringify(updatedList))
+      },
+      deep: true
     }
   },
   methods: {
-    handleSubmit(note) {
+    // * get / set notes
+    getNotes() {
+      const localNotes = localStorage.getItem('notes')
+      if (localNotes) {
+        this.notes = JSON.parse(localNotes)
+      }
+    },
+    // * submit notes
+    handleSubmit(title) {
+      const note = {
+        title: title,
+        tags: []
+      }
       this.notes.push(note)
     },
+    // * remove note
     handleRemove(index) {
       this.notes.splice(index, 1)
     }
