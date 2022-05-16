@@ -20,31 +20,22 @@ export default {
         value: '',
         tags: []
       },
-      // tags: [
-      //   {
-      //     title: 'home',
-      //     isActive: false
-      //   },
-      //   {
-      //     title: 'work',
-      //     isActive: false
-      //   },
-      //   {
-      //     title: 'travel',
-      //     isActive: false
-      //   }
       tags: ['home', 'work', 'travel']
     }
   },
   methods: {
     onSubmit() {
-      const title = this.note.value
+      const title = this.note.value.trim()
       const tags = this.note.tags
       this.$emit('onSubmit', { title, tags })
       this.note.value = ''
       this.note.tags = []
+      document
+        .querySelectorAll('.tag-item')
+        .forEach(tag => tag.classList.remove('isActive'))
     },
     handleTagClick(tag) {
+      event.target.classList.toggle('isActive')
       if (!this.note.tags.includes(tag)) {
         this.note.tags.push(tag)
       } else {
