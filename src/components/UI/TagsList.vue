@@ -4,7 +4,7 @@
       class="tag-item"
       v-for="item in items"
       :key="item"
-      @click="$emit('onItemClick', item)"
+      @click="onTagClick(item)"
       :class="{ isActive: isActive, isPreview: isPreview }"
     >
       {{ item }}
@@ -26,6 +26,15 @@ export default {
     isPreview: {
       type: Boolean,
       default: false
+    }
+  },
+
+  methods: {
+    onTagClick(tag) {
+      if (event.target.closest('.note-form')) {
+        event.target.classList.toggle('isActive')
+        // this.$store.dispatch('addTagsToNote', tag)
+      }
     }
   }
 }

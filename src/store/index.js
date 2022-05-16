@@ -15,13 +15,14 @@ export const store = createStore({
         title: 'Visit Museum',
         tags: ['travel']
       }
-    ]
+    ],
+    tags: ['home', 'work', 'travel']
   },
   mutations: {
-    addNote(state, note) {
+    addNote(state, { title, activeTags }) {
       const newNote = {
-        title: note.title,
-        tags: note.tags
+        title: title,
+        tags: activeTags
       }
       state.notes.push(newNote)
     },
@@ -30,16 +31,19 @@ export const store = createStore({
     }
   },
   actions: {
-    addNote({ commit }, note) {
-      commit('addNote', note)
+    addNote({ commit }, { title, activeTags }) {
+      commit('addNote', { title, activeTags })
     },
     removeNote({ commit }, index) {
       commit('removeNote', index)
     }
   },
   getters: {
-    getAllNotes(state) {
+    getNotes(state) {
       return state.notes
+    },
+    getTags(state) {
+      return state.tags
     }
   }
 })

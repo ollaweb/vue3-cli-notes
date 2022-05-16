@@ -1,6 +1,6 @@
 <template>
   <div class="notes-list">
-    <div class="note-item" v-for="(note, index) in items" :key="index">
+    <div class="note-item" v-for="(note, index) in getNotes" :key="index">
       <div class="note-header">
         <p>{{ note.title }}</p>
         <p style="cursor: pointer" @click="onRemove(index)">&#10005;</p>
@@ -23,10 +23,9 @@ export default {
   components: {
     TagsList
   },
-  props: {
-    items: {
-      type: Array,
-      required: true
+  computed: {
+    getNotes() {
+      return this.$store.getters.getNotes
     }
   },
   methods: {

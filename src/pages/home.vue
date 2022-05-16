@@ -1,6 +1,6 @@
 <template>
   <Form />
-  <List :items="getAllNotes" />
+  <List />
 </template>
 
 <script>
@@ -23,11 +23,7 @@ export default {
       deep: true
     }
   },
-  computed: {
-    getAllNotes() {
-      return this.$store.getters.getAllNotes
-    }
-  },
+
   methods: {
     // * get / set notes
     getNotes() {

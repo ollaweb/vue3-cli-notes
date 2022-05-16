@@ -1,8 +1,8 @@
 <template>
   <div class="note-form__wrapper">
     <form class="note-form" @submit.prevent="onSubmit">
-      <textarea required v-model="note.value" placeholder="Type ur note" />
-      <TagsList @onItemClick="handleTagClick" :items="tags" />
+      <textarea required v-model="value" placeholder="Type ur note" />
+      <TagsList :items="getTags" />
       <button class="btn btnPrimary" type="submit">Add new note</button>
     </form>
   </div>
@@ -16,32 +16,29 @@ export default {
   },
   data() {
     return {
-      note: {
-        value: '',
-        tags: []
-      },
-      tags: ['home', 'work', 'travel']
+      value: ''
+    }
+  },
+  computed: {
+    getTags() {
+      return this.$store.getters.getTags
     }
   },
   methods: {
     onSubmit() {
-      const title = this.note.value.trim()
-      const tags = this.note.tags
-      this.$store.dispatch('addNote', { title, tags })
-      this.note.value = ''
-      this.note.tags = []
+      const title = this.value.trim()
+      const tags = document
+        .querySelector('.note-form')
+        .querySelectorAll('.tag-item')
+      const filterActiveTags = Array.from(tags).filter(tag =>
+        tag.classList.contains('isActive')
+      )
+      const activeTags = filterActiveTags.map(tag => tag.textContent)
+      this.$store.dispatch('addNote', { title, activeTags })
+      this.value = ''
       document
         .querySelectorAll('.tag-item')
         .forEach(tag => tag.classList.remove('isActive'))
-    },
-    handleTagClick(tag) {
-      event.target.classList.toggle('isActive')
-      if (!this.note.tags.includes(tag)) {
-        this.note.tags.push(tag)
-      } else {
-        const tagIndex = this.note.tags.indexOf(tag)
-        this.note.tags.splice(tagIndex, 1)
-      }
     }
   }
 }
