@@ -1,6 +1,6 @@
 <template>
-  <Form @onSubmit="handleSubmit" />
-  <List @onRemove="handleRemove" :items="notes" />
+  <Form />
+  <List :items="getAllNotes" />
 </template>
 
 <script>
@@ -12,33 +12,20 @@ export default {
     Form,
     List
   },
-  data() {
-    return {
-      notes: [
-        {
-          title: 'Learn Vue 3',
-          tags: ['work']
-        },
-        {
-          title: 'Finish Course',
-          tags: ['work', 'home']
-        },
-        {
-          title: 'Visit Museum',
-          tags: ['travel']
-        }
-      ]
-    }
-  },
-  mounted() {
-    this.getNotes()
-  },
+  // mounted() {
+  //   this.getNotes()
+  // },
   watch: {
     notes: {
       handler(updatedList) {
         localStorage.setItem('notes', JSON.stringify(updatedList))
       },
       deep: true
+    }
+  },
+  computed: {
+    getAllNotes() {
+      return this.$store.getters.getAllNotes
     }
   },
   methods: {
@@ -48,18 +35,6 @@ export default {
       if (localNotes) {
         this.notes = JSON.parse(localNotes)
       }
-    },
-    // * submit notes
-    handleSubmit({ title, tags }) {
-      const note = {
-        title: title,
-        tags: tags
-      }
-      this.notes.push(note)
-    },
-    // * remove note
-    handleRemove(index) {
-      this.notes.splice(index, 1)
     }
   }
 }

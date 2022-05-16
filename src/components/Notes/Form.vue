@@ -27,7 +27,7 @@ export default {
     onSubmit() {
       const title = this.note.value.trim()
       const tags = this.note.tags
-      this.$emit('onSubmit', { title, tags })
+      this.$store.dispatch('addNote', { title, tags })
       this.note.value = ''
       this.note.tags = []
       document

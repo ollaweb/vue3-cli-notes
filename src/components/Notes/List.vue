@@ -3,9 +3,7 @@
     <div class="note-item" v-for="(note, index) in items" :key="index">
       <div class="note-header">
         <p>{{ note.title }}</p>
-        <p style="cursor: pointer" @click="$emit('onRemove', index)">
-          &#10005;
-        </p>
+        <p style="cursor: pointer" @click="onRemove(index)">&#10005;</p>
       </div>
       <div class="note-footer">
         <TagsList
@@ -29,6 +27,11 @@ export default {
     items: {
       type: Array,
       required: true
+    }
+  },
+  methods: {
+    onRemove(index) {
+      this.$store.dispatch('removeNote', index)
     }
   }
 }
