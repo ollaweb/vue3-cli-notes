@@ -23,6 +23,9 @@ export default {
   components: {
     TagsList
   },
+  mounted() {
+    this.$store.getters.checkLocalStorage
+  },
   computed: {
     getNotes() {
       return this.$store.getters.getNotes

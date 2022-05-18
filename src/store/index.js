@@ -1,4 +1,8 @@
 import { createStore } from 'vuex'
+import {
+  getFromLocalStorage,
+  setToLocalStorage
+} from '@/utils/handleLocalStorage'
 
 export const store = createStore({
   state: {
@@ -25,9 +29,11 @@ export const store = createStore({
         tags: activeTags
       }
       state.notes.push(newNote)
+      setToLocalStorage('notes', state.notes)
     },
     removeNote(state, index) {
       state.notes.splice(index, 1)
+      setToLocalStorage('notes', state.notes)
     }
   },
   actions: {
@@ -39,6 +45,14 @@ export const store = createStore({
     }
   },
   getters: {
+    checkLocalStorage(state) {
+      if (getFromLocalStorage('notes')) {
+        const localNotes = getFromLocalStorage('notes')
+        return (state.notes = localNotes)
+      } else {
+        return state.notes
+      }
+    },
     getNotes(state) {
       return state.notes
     },
