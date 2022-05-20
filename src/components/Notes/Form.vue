@@ -1,7 +1,7 @@
 <template>
   <div class="note-form__wrapper">
     <form class="note-form" @submit.prevent="onSubmit">
-      <textarea required v-model="value" placeholder="Type ur note" />
+      <textarea required v-model="value" placeholder="Type your note" />
       <TagsList :items="getTags" />
       <button class="btn btnPrimary" type="submit">Add new note</button>
     </form>
@@ -34,11 +34,15 @@ export default {
         tag.classList.contains('isActive')
       )
       const activeTags = filterActiveTags.map(tag => tag.textContent)
-      this.$store.dispatch('addNote', { title, activeTags })
-      this.value = ''
-      document
-        .querySelectorAll('.tag-item')
-        .forEach(tag => tag.classList.remove('isActive'))
+      this.$store
+        .dispatch('addNote', { title, activeTags })
+        .then(() => (this.value = ''))
+        .then(() =>
+          document
+            .querySelectorAll('.tag-item')
+            .forEach(tag => tag.classList.remove('isActive'))
+        )
+        .catch(err => console.log(err))
     }
   }
 }
