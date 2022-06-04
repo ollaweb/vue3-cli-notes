@@ -4,11 +4,11 @@
 
 ## Review
 
-![Look at this lovely design](https://github.com/ollaweb/vue3-notes/blob/main/Notes.jpg)
+![Look at this lovely design](https://github.com/ollaweb/vue3-cli-notes/blob/main/Notes.JPG)
 
 ## Demonstration
 
-![Demonstration](https://github.com/ollaweb/vue3-notes/blob/main/demonstration.gif)
+![Demonstration](https://github.com/ollaweb/vue3-cli-notes/blob/main/demonstration.gif)
 
 ### Description
 
