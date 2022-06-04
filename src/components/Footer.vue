@@ -7,6 +7,11 @@
             link.title
           }}</router-link>
         </li>
+        <li>
+          <a class="navbar-link" target="_blank" href="https://github.com/ollaweb/vue3-cli-notes">visit my repo
+          <img src="../assets/img/github.svg" alt="github">
+          </a>
+        </li>
       </ul>
 
       <!-- link to course -->

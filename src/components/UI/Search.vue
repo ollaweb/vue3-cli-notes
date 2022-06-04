@@ -76,12 +76,6 @@ export default {
   data() {
     return { value: '' }
   },
-  // watch: {
-  //   search(val) {
-  //     // console.log(val)
-  //     this.$emit('search', val)
-  //   }
-  // },
   computed: {
     getGrid() {
       return this.$store.getters.getGrid
@@ -97,7 +91,6 @@ export default {
     onSearch() {
       this.$store
         .dispatch('searchNote', this.value)
-        .then(() => console.log(this.value))
     }
   }
 }
@@ -122,6 +115,10 @@ export default {
     font-size: 16px;
     min-width: 400px;
     height: auto;
+    @media (max-width: 640px) {
+      flex: 0 1 75%;
+      min-width: auto;
+    }
   }
 }
 .search {
@@ -140,7 +137,7 @@ export default {
 
 .notes-show {
   text-align: right;
-  flex: 0 1 20%;
+  flex: 0 1 25%;
   & svg {
     color: #999;
     cursor: pointer;
@@ -151,5 +148,8 @@ export default {
       margin-right: 10px;
     }
   }
+  // @media (max-width:640px) {
+  //   flex: 0 1 30%;
+  // }
 }
 </style>

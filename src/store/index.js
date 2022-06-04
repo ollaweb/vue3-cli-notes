@@ -32,12 +32,11 @@ export const store = createStore({
     addNote(state, { title, activeTags }) {
       const newNote = {
         id: uniqid(),
-        title: title,
+        title: title.trim(),
         tags: activeTags
       }
       state.notes.push(newNote)
       setToLocalStorage('notes', state.notes)
-      console.log(state.notes)
     },
     removeNote(state, id) {
       state.notes.splice(

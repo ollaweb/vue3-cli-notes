@@ -12,7 +12,7 @@
 import TagsList from '@/components/UI/TagsList.vue'
 export default {
   components: {
-    TagsList
+    TagsList,
   },
   data() {
     return {
